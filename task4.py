@@ -10,7 +10,7 @@ for i in range(9, 1, -1):
             N /= i
             list.append(i)
 
-if len(list) == 0:
+if len(list) == 1:
     print(-1)
 else:
     list.reverse()
