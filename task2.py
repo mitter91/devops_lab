@@ -2,6 +2,6 @@
 
 N = input()
 if N == N[::-1]:
-   print("yes")
+    print("yes")
 else:
-   print("no")
+    print("no")
