@@ -5,4 +5,3 @@ if N == N[::-1]:
    print("yes")
 else:
    print("no")
-# print(N == N[::-1])
