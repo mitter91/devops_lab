@@ -6,4 +6,3 @@ N = input()
 # else:
 #    print("no")
 print(N == N[::-1])
-
