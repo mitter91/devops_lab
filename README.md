@@ -1,38 +1,50 @@
-
 DevOps Lab 2020 (January-April)
-Homework3: Artsemi Yoursh
+Homework4: Artsemi Yoursh
 
 Description: <br>
 This app outputs next information: 
-- Timestamp
-- % of CPU load
-- % of disk usage
-- % of usage virtual memory
-- IO information
-- network packets sent
+- html url of repository by default
+- Number of forks with -f key
+- Number of subscribers with -s key
+- Number of opened issues with -i key
+- Creation date and time with -t key
+- SSH link of repository with -ssh key
 
-And redirect information to json/txt (output.<json/txt>) file in your current directory.
+Outputs data in terminal.
 
 How it works: <br>
 Application recieves two parameters:<br>
-- Output file format: txt or json. Default - txt
-- Time interval. Default - 5 mins
+- Enter the name of repository owner after key -o or --owner
+- Enter the repository name after key -r or --repo
 
-```bash
-# for help
-snapshot -h (--help)
-# for run by default
-snapshot 
-# takes snaphosts every 3 mins and put it into json file
-snapshot json 3
-# takes snaphosts every 1 min and put it into txt file
-snapshot txt 1
-```
+It combines data into a link and uses it to receive the information.
+
+Defaults (if keys not entered):
+-o alenaPy
+-r devops_lab
 
 How to setup: <br>
 Clone the repo and navigate to this folder.
 
 ```bash
 # to install
- pip install .
- snapshot
+ pip pr-stats .
+ pr-stats
+
+Helpfile: <br>
+usage: pr-stats [-h] [-f] [-s] [-i] [-t] [-ssh] [-o OWNER] [-r REPO] [-v]
+
+Greetings
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -f                    Outputs number of forks
+  -s                    Outputs number of subscribers
+  -i                    Outputs number of opened issues
+  -t                    Outputs creation date and time
+  -ssh                  SSH link for work
+  -o OWNER, --owner OWNER
+                        Repository owner name.
+  -r REPO, --repo REPO  Name of repository.
+  -v, --version         show program's version number and exit
+

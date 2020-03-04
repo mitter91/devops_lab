@@ -1,0 +1,72 @@
+#!/usr/bin/env python
+
+import argparse
+import getpass
+import requests
+from requests.auth import HTTPBasicAuth
+
+parser = argparse.ArgumentParser(description='Greetings')
+parser.add_argument('-f', action="store_true", help='Outputs number of forks')
+parser.add_argument('-s', action="store_true", help='Outputs number of subscribers')
+parser.add_argument('-i', action="store_true", help='Outputs number of opened issues')
+parser.add_argument('-t', action="store_true", help='Outputs creation date and time')
+parser.add_argument('-ssh', action="store_true", help='SSH link for work')
+parser.add_argument(
+    '-o', '--owner',
+    default='alenaPy',
+    help='Repository owner name.'
+)
+parser.add_argument(
+    '-r', '--repo',
+    default='devops_lab',
+    help='Name of repository.'
+)
+parser.add_argument('-v', '--version', action='version', version='version b_0.1')
+args = parser.parse_args()
+
+url = str('https://api.github.com/repos/' + args.owner + '/' + args.repo)
+
+uname = input('Username: ')
+passw = getpass.getpass(prompt='Password: ', stream=None)
+
+auth = HTTPBasicAuth(uname, passw)
+
+
+class Wronglink(Exception):
+    pass
+
+
+class Wrongpassw(Exception):
+    pass
+
+
+try:
+    r = requests.get(url=url, auth=auth)
+    cont = r.json()
+    if r.status_code == 404:
+        raise Wronglink
+    elif r.status_code == 401:
+        raise Wrongpassw
+except Wronglink:
+    print('Wrong link')
+except Wrongpassw:
+    print('Wrong password')
+else:
+    for k, v in cont.items():
+        if k == 'html_url':
+            print(k, v)
+
+        if args.f and k == 'forks':
+            print(k, v)
+
+        if args.s and k == 'subscribers_count':
+            print(k, v)
+
+        if args.i and k == 'open_issues':
+            print(k, v)
+
+        if args.t and k == 'created_at':
+            print(k, v)
+
+        if args.ssh and k == 'ssh_url':
+            print(k, v)

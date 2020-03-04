@@ -1,10 +1,10 @@
 from setuptools import setup, find_packages
 
 setup(
-    name="snapshot",
+    name="pr-stats",
     packages=find_packages(),
-    scripts=['snapshot/snapshot'],
-    version="1.0",
+    scripts=['pr-stats'],
+    version="0.1",
     author="Artsemi Yoursh",
-    description="snap-snap",
+    description="pr-stats",
 )
