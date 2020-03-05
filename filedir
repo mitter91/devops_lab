@@ -1,0 +1,89 @@
+#!/usr/bin/env python
+
+import os
+import argparse
+
+parser = argparse.ArgumentParser(description='Greetings')
+parser.add_argument('-par', action="store_true",
+                    help='MANDATORY: List of files from the parent directory')
+parser.add_argument('-rec', action="store_true",
+                    help='MANDATORY: List of files recursively')
+parser.add_argument('-fe', nargs='?', default=False, action="store",
+                    dest='fe', help='File extention filter')
+parser.add_argument('-of', action="store_true",
+                    help='Order output by filename')
+parser.add_argument('-od', action="store_true",
+                    help='Order output by date of creation')
+parser.add_argument('-p', '--path', nargs='?', default='/home',
+                    action="store", dest='path', help='Path. Default: /home')
+
+args = parser.parse_args()
+
+
+def get():
+    f = []
+    t = []
+    for root, dirs, files in os.walk(args.path, topdown=False):
+        for name in files:
+            if args.par:
+                if root == args.path:
+                    f.append(name)
+                    t.append(os.path.getctime(os.path.join(root, name)))
+            elif args.rec:
+                f.append(name)
+                t.append(os.path.getctime(os.path.join(root, name)))
+    return f, t
+
+
+def sort_od(time, list):
+    listout = [x for _, x in sorted(zip(time, list))]
+    return listout
+
+
+def filter(listin):
+    listout = []
+    for name in listin:
+        if name.endswith("." + args.fe):
+            listout.append(name)
+    return listout
+
+
+class Wrongpar(Exception):
+    pass
+
+
+class Wrongord(Exception):
+    pass
+
+
+class Wrongpath(Exception):
+    pass
+
+
+try:
+    if args.par == args.rec:
+        raise Wrongpar
+    elif args.par and args.rec:
+        raise Wrongord
+    elif not os.path.isdir(args.path):
+        raise Wrongpath
+
+except Wrongpar:
+    print('Wrong parameter for list of files. Try -h for help.')
+except Wrongord:
+    print('Wrong order parameter. You have to choose only one.')
+except Wrongpath:
+    print('Path not exist.')
+else:
+    f, t = get()
+
+    if args.of:
+        f.sort()
+    elif args.od:
+        f = sort_od(t, f)
+
+    if args.fe:
+        f = filter(f)
+
+    for name in f:
+        print(name)
