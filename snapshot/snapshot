@@ -74,9 +74,7 @@ def make_out():
             }
             with open("output.json", "a") as file:
                 json.dump(out_data, file, indent=3)
-            file = open('output.json', 'a+')
-            file.write('\n')
-            file.close()
+                json.write('\n')
             time.sleep(args.interval * 60)
 
 
