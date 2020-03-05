@@ -55,18 +55,13 @@ else:
     for k, v in cont.items():
         if k == 'html_url':
             print(k, v)
-
-        if args.f and k == 'forks':
+        elif args.f and k == 'forks':
             print(k, v)
-
-        if args.s and k == 'subscribers_count':
+        elif args.s and k == 'subscribers_count':
             print(k, v)
-
-        if args.i and k == 'open_issues':
+        elif args.i and k == 'open_issues':
             print(k, v)
-
-        if args.t and k == 'created_at':
+        elif args.t and k == 'created_at':
             print(k, v)
-
-        if args.ssh and k == 'ssh_url':
+        elif args.ssh and k == 'ssh_url':
             print(k, v)
