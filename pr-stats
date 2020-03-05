@@ -24,7 +24,7 @@ parser.add_argument(
 parser.add_argument('-v', '--version', action='version', version='version b_0.1')
 args = parser.parse_args()
 
-url = str('https://api.github.com/repos/' + args.owner + '/' + args.repo)
+url = 'https://api.github.com/repos/' + args.owner + '/' + args.repo
 
 uname = input('Username: ')
 passw = getpass.getpass(prompt='Password: ', stream=None)
