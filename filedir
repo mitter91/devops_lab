@@ -63,7 +63,7 @@ class Wrongpath(Exception):
 try:
     if args.par == args.rec:
         raise Wrongpar
-    elif args.par and args.rec:
+    elif args.of and args.od:
         raise Wrongord
     elif not os.path.isdir(args.path):
         raise Wrongpath
