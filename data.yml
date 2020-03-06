@@ -1,0 +1,17 @@
+apache_vhosts:
+- servername: www.domain.tld
+  documentroot: /www/domain_ltd
+  directorypath: /usr/local/httpd/htdocs_ltd
+  serveradmin: www_adminus_for_all@example.com
+
+- servername: www.domain.bybyby
+  documentroot: /www/domain_bybyby
+  directorypath: /usr/local/httpd/htdocs_bybyby
+  serveradmin: www_adminus_for_all@example.com
+
+- servername: www.domain.nyaml
+  documentroot: /www/domain_nyaml
+  directorypath: /usr/local/httpd/htdocs_nyaml
+  serveradmin: www_adminus_for_all@example.com
+
+
