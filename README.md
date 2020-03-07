@@ -27,7 +27,9 @@ Clone the repo and navigate to this folder.
 
 ```bash
 # to install
- filedir .
+ pip install .
+ 
+ use:
  filedir
 
 Helpfile: <br>
